@@ -5,11 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Chatbot</title>
     <style>
+
+        /* Chat Header (Logo and Name) */
+.chat-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.company-logo {
+    width: 30px;  /* Adjust size as needed */
+    height: 30px;
+    object-fit: contain;
+}
+
+.company-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
         .chat-container {
             width: 80%;
             background: white;
-            padding: 10px;
-            border-radius: 10px;
+            padding: 20px;
+            border-radius: 40px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
@@ -17,8 +39,15 @@
             position: fixed;
             bottom: 80px;
             right: 20px;
-            display: none; /* Initially hidden */
             margin-left: 30px;
+            max-width: 300px;
+            transform: translateY(100%); /* Start off-screen */
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .chat-container.active {
+            transform: translateY(0); /* Slide into view */
+            opacity: 1;
         }
         #chat-box {
             flex: 1;
@@ -26,7 +55,6 @@
             padding: 10px;
             border-bottom: 1px solid #ccc;
             max-height: 400px;
-        
         }
         .message {
             margin: 8px 0;
@@ -92,6 +120,38 @@
     </style>
 </head>
 <body>
+
+    <div class="chat-container" id="chat-container">
+        <!-- Company Logo and Name Section -->
+        <div class="chat-header">
+            <a href="https://imgbb.com/">
+                <img src="https://i.ibb.co.com/NdKM1TgS/Screenshot-2025-02-26-113648.png" alt="Company Logo" class="company-logo">
+            </a>
+            <span class="company-name">BrandRise</span>
+        </div>
+        <div id="chat-box"></div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    
+
+    <div class="chat-container" id="chat-container">
+        <!-- Company Logo and Name Section -->
+        <div class="chat-header">
+            <img src="path/to/your-logo.png" alt="Company Logo" class="company-logo">
+            <span class="company-name">Your Company Name</span>
+        </div>
+        <div id="chat-box"></div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    
     <!-- Chat Container -->
     <div class="chat-container" id="chat-container">
         <div id="chat-box"></div>
@@ -113,8 +173,8 @@
 
         // Put your document text here
         const documentText = `
-           Your welcome message 'Hello! there I'm your virtual assistant.How can i help you today?'.
-           "What are your shipping times?": "Our shipping takes 3-7 business days, depending on your location. You will receive an email with tracking information once your order is dispatched.",
+            Your welcome message 'Hello! there I'm your virtual assistant.How can i help you today?'.
+            "What are your shipping times?": "Our shipping takes 3-7 business days, depending on your location. You will receive an email with tracking information once your order is dispatched.",
         `;
 
         function appendMessage(text, sender) {
@@ -124,6 +184,40 @@
             chatBox.appendChild(messageDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+    // Get the input and button elements
+    const input = document.getElementById("user-input");
+    const button = document.querySelector("button");
+
+    // Apply rounded styles using JS
+    input.style.borderRadius = "25px"; // Make the input field rounded
+    button.style.borderRadius = "25px"; // Make the button rounded
+
+    // Additional styles for button
+    input.style.padding = "10px";
+    input.style.fontSize = "14px";
+    input.style.color = "#333";
+    input.style.background = "#f9f9f9";
+    
+    // Send button styles
+    button.style.background = "#007bff";
+    button.style.color = "white";
+    button.style.padding = "10px 15px";
+    button.style.fontSize = "14px";
+    button.style.cursor = "pointer";
+    button.style.transition = "background 0.3s ease";
+
+    // Hover effect for button (using JS)
+    button.addEventListener('mouseover', () => {
+        button.style.background = "#0056b3";
+    });
+
+    button.addEventListener('mouseout', () => {
+        button.style.background = "#007bff";
+    });
+});
+
 
         async function sendMessage() {
             const message = userInput.value.trim();
@@ -165,13 +259,9 @@
             }
         });
 
-        // Toggle Chat Visibility
+        // Toggle Chat Visibility with Animation
         function toggleChat() {
-            if (chatContainer.style.display === "none" || chatContainer.style.display === "") {
-                chatContainer.style.display = "flex";
-            } else {
-                chatContainer.style.display = "none";
-            }
+            chatContainer.classList.toggle("active");  // Toggle the active class to trigger the animation
         }
     </script>
 </body>
