@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Chatbot</title>
     <style>
-        /* Chat container */
         .chat-container {
-            width: 100%;
-            max-width: 400px;
+            width: 400px;
             background: white;
             padding: 15px;
             border-radius: 10px;
@@ -20,6 +18,8 @@
             bottom: 80px;
             right: 20px;
             display: none; /* Initially hidden */
+            margin-left: 10px;
+            margin-right: 10px;
         }
         #chat-box {
             flex: 1;
@@ -27,6 +27,8 @@
             padding: 10px;
             border-bottom: 1px solid #ccc;
             max-height: 400px;
+            margin-left: 10px;
+            margin-right: 10px;
         }
         .message {
             margin: 8px 0;
@@ -89,36 +91,6 @@
         .chat-icon:hover {
             background: #0056b3;
         }
-
-        /* Responsive Styles */
-        @media (max-width: 600px) {
-            .chat-container {
-                width: 90%;
-                max-width: 400px;
-                bottom: 20px;
-                right: 10px;
-                height: 400px;
-            }
-            .chat-icon {
-                width: 45px;
-                height: 45px;
-                font-size: 22px;
-                bottom: 10px;
-                right: 10px;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .chat-container {
-                width: 90%;
-                max-width: 350px;
-            }
-            .chat-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -142,8 +114,10 @@
         const chatContainer = document.getElementById("chat-container");
 
         // Put your document text here
-        const documentText = `Your welcome message 'Hello! there I'm your virtual assistant.How can i help you today?'.
-                             "What are your shipping times?": "Our shipping takes 3-7 business days, depending on your location. You will receive an email with tracking information once your order is dispatched."`;
+        const documentText = `
+           Your welcome message 'Hello! there I'm your virtual assistant.How can i help you today?'.
+           "What are your shipping times?": "Our shipping takes 3-7 business days, depending on your location. You will receive an email with tracking information once your order is dispatched.",
+        `;
 
         function appendMessage(text, sender) {
             const messageDiv = document.createElement("div");
