@@ -27,11 +27,22 @@
     color: #333;
 }
 
+/* Chat Box */
+#chat-box {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    max-height: 400px;
+    background-color: #ffffff; /* Slight grey background for the chat area */
+}
+
+
         .chat-container {
             width: 80%;
             background: white;
             padding: 20px;
-            border-radius: 40px;
+            border-radius: 20px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
@@ -122,21 +133,41 @@
 <body>
 
     <div class="chat-container" id="chat-container">
-        <!-- Company Logo and Name Section -->
         <div class="chat-header">
             <a href="https://imgbb.com/">
-                <img src="https://i.ibb.co.com/NdKM1TgS/Screenshot-2025-02-26-113648.png" alt="Company Logo" class="company-logo">
+                <img src="https://i.ibb.co.com/PsqSPNM4/Instagram-post-19.png" alt="Logo" class="company-logo">
             </a>
             <span class="company-name">BrandRise</span>
         </div>
-        <div id="chat-box"></div>
+        <div id="chat-box">
+            <div class="message bot-message" id="welcome-message">Hello! I'm your virtual assistant. How can I help you today?</div>
+        </div>
         <div class="input-container">
-            <input type="text" id="user-input" placeholder="Type a message...">
+            <input type="text" id="user-input" placeholder="Type a message..." onkeypress="if(event.key==='Enter'){sendMessage()}">
             <button onclick="sendMessage()">Send</button>
         </div>
     </div>
-
+    <button class="chat-icon" onclick="toggleChat()">💬</button>
     
+    <script>
+        let firstTime = true;
+        function sendMessage() {
+            const message = document.getElementById("user-input").value.trim();
+            if (message) {
+                if (firstTime) { document.getElementById("welcome-message").remove(); firstTime = false; }
+                document.getElementById("chat-box").innerHTML += `<div class="message user-message">${message}</div>`;
+                document.getElementById("user-input").value = "";
+                document.getElementById("chat-box").scrollTop = document.getElementById("chat-box").scrollHeight;
+                setTimeout(() => document.getElementById("chat-box").innerHTML += `<div class="message bot-message">This is where your bot's reply will go.</div>`, 500);
+            }
+        }
+    
+        function toggleChat() {
+            document.getElementById("chat-container").classList.toggle("active");
+        }
+    </script>
+
+
 
     <div class="chat-container" id="chat-container">
         <!-- Company Logo and Name Section -->
@@ -150,6 +181,7 @@
             <button onclick="sendMessage()">Send</button>
         </div>
     </div>
+    
 
     
     <!-- Chat Container -->
@@ -170,6 +202,13 @@
         const chatBox = document.getElementById("chat-box");
         const userInput = document.getElementById("user-input");
         const chatContainer = document.getElementById("chat-container");
+
+        document.addEventListener("DOMContentLoaded", () => {
+    document.body.style.fontFamily = "'Inter', sans-serif";
+});
+
+
+
 
         // Put your document text here
         const documentText = `
