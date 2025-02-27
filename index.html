@@ -16,8 +16,8 @@
 }
 
 .company-logo {
-    width: 30px;  /* Adjust size as needed */
-    height: 30px;
+    width: 40px;  /* Adjust size as needed */
+    height: 40px;
     object-fit: contain;
 }
 
@@ -68,11 +68,15 @@
             max-height: 400px;
         }
         .message {
-            margin: 8px 0;
-            padding: 10px;
-            border-radius: 5px;
-            max-width: 80%;
-        }
+    display: inline-block;  /* Make the bubble size match text */
+    max-width: 80%;  /* Prevents overly wide bubbles */
+    padding: 8px 12px;  /* Adjust padding for better look */
+    border-radius: 5px;
+    word-wrap: break-word;  /* Ensure long words don't overflow */
+    font-size: 16px;
+    margin: 3px;
+    margin-left: -3px;
+}
         .user-message {
             background: #007bff;
             color: white;
@@ -103,6 +107,13 @@
         button:hover {
             background: #0056b3;
         }
+
+        .close-icon {
+    width: 25px;  /* Adjust size as needed */
+    height: 25px;
+    cursor: pointer;
+    margin-left: 75px;
+}
         .input-container {
             display: flex;
             gap: 10px;
@@ -133,12 +144,33 @@
 <body>
 
     <div class="chat-container" id="chat-container">
+
+
         <div class="chat-header">
-            <a href="https://imgbb.com/">
-                <img src="https://i.ibb.co.com/PsqSPNM4/Instagram-post-19.png" alt="Logo" class="company-logo">
-            </a>
-            <span class="company-name">BrandRise</span>
+            <div style="display: flex; align-items: center; gap: 10px;">
+
+
+
+
+                <!-- Company Logo and Name Section -->
+
+
+
+
+
+                <img src="https://i.ibb.co.com/S4YkQMMJ/Screenshot-2025-02-27-194232-1.png" alt="Logo" class="company-logo">
+                <span class="company-name">Allroundplumber</span>
+
+
+
+
+
+
+
+            </div>
+            <img src="https://i.ibb.co.com/TDbGX0vD/Group-385.png"  alt="Close" class="close-icon" onclick="toggleChat()">
         </div>
+        
         <div id="chat-box">
             <div class="message bot-message" id="welcome-message">Hello! I'm your virtual assistant. How can I help you today?</div>
         </div>
@@ -170,10 +202,13 @@
 
 
     <div class="chat-container" id="chat-container">
+
+
         <!-- Company Logo and Name Section -->
+
         <div class="chat-header">
             <img src="path/to/your-logo.png" alt="Company Logo" class="company-logo">
-            <span class="company-name">Your Company Name</span>
+            <span class="company-name">LaunshEcom</span>
         </div>
         <div id="chat-box"></div>
         <div class="input-container">
@@ -213,7 +248,12 @@
         // Put your document text here
         const documentText = `
             Your welcome message 'Hello! there I'm your virtual assistant.How can i help you today?'.
-            "What are your shipping times?": "Our shipping takes 3-7 business days, depending on your location. You will receive an email with tracking information once your order is dispatched.",
+            "what service do you offer? ": "At Allround Plumber, we specialize in a wide range of plumbing services to ensure your home runs smoothly. 
+            Our expert plumbers are here to help with any plumbing issue, including:Sink Clogged,Toilet Clogged,Dishwasher Clogged, Bathroom Clogged, Kitchen Drain Clogged, Gutter Clogged.",
+            "Can you fix basement floded?": "Of course! After heavy rainfall or a leak, a basement can be flooded with water. On this page you can read all the information you need to know under these circumstances. In any case, 
+            the basement must be pumped out as quickly as possible to prevent further damage. We identify the underlying cause for you and provide a sustainable solution where possible.",
+            "What is your contact information?": "Call us at 06-24356980 or email at: info@allroundplumber.nl",
+            "Are you available 24 hours?": "Yes!we are available 24 hours 7 days a week.",
         `;
 
         function appendMessage(text, sender) {
