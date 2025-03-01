@@ -41,9 +41,9 @@
         .chat-container {
             width: 80%;
             background: white;
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px 20px;
+            border-radius: 30px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15); /* Smooth, soft shadow */
             display: flex;
             flex-direction: column;
             height: 500px;
@@ -51,6 +51,7 @@
             bottom: 80px;
             right: 20px;
             margin-left: 30px;
+            margin-bottom: 5px;
             max-width: 300px;
             transform: translateY(100%); /* Start off-screen */
             opacity: 0;
@@ -68,25 +69,28 @@
             max-height: 400px;
         }
         .message {
-    display: inline-block;  /* Make the bubble size match text */
-    max-width: 80%;  /* Prevents overly wide bubbles */
-    padding: 8px 12px;  /* Adjust padding for better look */
-    border-radius: 5px;
-    word-wrap: break-word;  /* Ensure long words don't overflow */
+    display: inline-block;
+    max-width: 80%;
+    padding: 10px 15px;
+    border-radius: 18px; /* Rounded corners for a smooth look */
     font-size: 16px;
-    margin: 3px;
-    margin-left: -3px;
+    margin: 5px 0;
+    word-wrap: break-word;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    position: relative;
 }
-        .user-message {
-            background: #007bff;
-            color: white;
-            align-self: flex-end;
-        }
+.user-message {
+    background: black ; /* Modern gradient */
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px; /* Adjust bottom corner for a speech bubble effect */
+}
         .bot-message {
-            background: #e5e5e5;
-            color: black;
-            align-self: flex-start;
-        }
+    background: #f1f1f1;
+    color: black;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
         input, button {
             padding: 10px;
             border: none;
@@ -99,26 +103,54 @@
             padding: 10px;
         }
         button {
-            background: #007bff;
+            background: #000000;
             color: white;
             cursor: pointer;
             border-radius: 5px;
         }
         button:hover {
-            background: #0056b3;
+            background: black;
         }
 
         .close-icon {
     width: 25px;  /* Adjust size as needed */
     height: 25px;
     cursor: pointer;
-    margin-left: 100px;
+    margin-left: auto;
 }
         .input-container {
             display: flex;
             gap: 10px;
         }
 
+  
+        .typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    font-style: italic;
+    color: gray;
+    margin: 10px 0 5px 0;  /* Top margin increased for spacing */
+}
+
+.typing-indicator span {
+    width: 6px;
+    height: 6px;
+    background-color: gray;
+    border-radius: 50%;
+    animation: blink 1.5s infinite;
+}
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+@keyframes blink {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
 
 
         /* Chat Icon Button */
@@ -126,10 +158,11 @@
         
         .chat-icon {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #EB3E08;
-            color: #EB3E08;
+            bottom: 30px;
+            right: 30px;
+            margin: auto;
+            background: #1A1A1A;
+            color: #1A1A1A;
             border: none;
             border-radius: 50%;
             width: 50px;
@@ -142,7 +175,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
         }
         .chat-icon:hover {
-            background: #EB3E08;
+            background: #1A1A1A;
         }
     </style>
 </head>
@@ -164,7 +197,7 @@
 
 
                 <img src="https://i.ibb.co.com/cS8B8gDW/Instagram-post-19.png" alt="Logo" class="company-logo">
-                <span class="company-name">LaunchEcom</span>
+                <span class="company-name">Halo Lab </span>
 
 
 
@@ -181,13 +214,44 @@
         </div>
         <div class="input-container">
             <input type="text" id="user-input" placeholder="Type a message..." onkeypress="if(event.key==='Enter'){sendMessage()}">
-            <button onclick="sendMessage()">Send</button>
+           
+            
+            <!-- send button color -->
+            
+            <button class="send-button" onclick="sendMessage()">
+                <img src="https://i.ibb.co/hJqb9YmZ/Group-548.png" alt="Send" class="send-icon">
+            </button>
         </div>
+
+
+
+
+
+        
+        
+        <style>
+            .send-button {
+                background: black;
+                border: none;
+                cursor: url('https://ibb.co.com/B51b3nCr"><img src="https://i.ibb.co.com/hJqb9YmZ/Group-548.png'), pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .send-icon {
+                width: 20px;
+                height: 20px;
+            }
+        </style>
     </div>
     <button class="chat-icon" onclick="toggleChat()">💬</button>
     
     
     <script>
+
+
+
+        
         let firstTime = true;
         function sendMessage() {
             const message = document.getElementById("user-input").value.trim();
@@ -228,6 +292,7 @@
     <!-- Chat Container -->
     <div class="chat-container" id="chat-container">
         <div id="chat-box"></div>
+        
         <div class="input-container">
             <input type="text" id="user-input" placeholder="Type a message...">
             <button onclick="sendMessage()">Send</button>
@@ -254,6 +319,8 @@
         // Put your document text here
         const documentText = `
             Your welcome message 'Hello! there I'm your virtual assistant.How can i help you today?'.
+
+
             "what service do you offer? ": "At Allround Plumber, we specialize in a wide range of plumbing services to ensure your home runs smoothly. 
             Our expert plumbers are here to help with any plumbing issue, including:Sink Clogged,Toilet Clogged,Dishwasher Clogged, Bathroom Clogged, Kitchen Drain Clogged, Gutter Clogged.",
             "Can you fix basement floded?": "Of course! After heavy rainfall or a leak, a basement can be flooded with water. On this page you can read all the information you need to know under these circumstances. In any case, 
@@ -286,56 +353,73 @@
     input.style.background = "#f9f9f9";
     
     // Send button styles
-    button.style.background = "#007bff";
+    button.style.background = "#1A1A1A";
     button.style.color = "white";
     button.style.padding = "10px 15px";
     button.style.fontSize = "14px";
     button.style.cursor = "pointer";
     button.style.transition = "background 0.3s ease";
+    
 
     // Hover effect for button (using JS)
     button.addEventListener('mouseover', () => {
-        button.style.background = "#0056b3";
+        button.style.background = "#1A1A1A";
     });
 
     button.addEventListener('mouseout', () => {
-        button.style.background = "#007bff";
+        button.style.background = "#1A1A1A";
     });
 });
 
 
-        async function sendMessage() {
-            const message = userInput.value.trim();
-            if (!message) return;
+async function sendMessage() {
+    const message = userInput.value.trim();
+    if (!message) return;
 
-            appendMessage(message, "user");
-            userInput.value = "";
+    // Append User Message
+    appendMessage(message, "user");
+    userInput.value = "";
 
-            try {
-                const response = await fetch("https://api.together.xyz/v1/chat/completions", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${API_KEY}`
-                    },
-                    body: JSON.stringify({
-                        model: MODEL,
-                        messages: [
-                            { role: "system", content: documentText }, // Adding document text as context
-                            { role: "user", content: message }
-                        ],
-                        max_tokens: 200
-                    })
-                });
+    // Show Typing Indicator Below User Message
+    const typingIndicator = document.createElement("div");
+    typingIndicator.classList.add("typing-indicator");
+    typingIndicator.innerHTML = `<span></span><span></span><span></span> Bot is typing...`;
+    chatBox.appendChild(typingIndicator);
+    chatBox.scrollTop = chatBox.scrollHeight;
 
-                const data = await response.json();
-                const botReply = data.choices?.[0]?.message?.content || "Sorry, I couldn't understand that.";
-                appendMessage(botReply, "bot");
-            } catch (error) {
-                appendMessage("Error: Unable to reach AI service.", "bot");
-                console.error("API Error:", error);
-            }
-        }
+    try {
+        const response = await fetch("https://api.together.xyz/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${API_KEY}`
+            },
+            body: JSON.stringify({
+                model: MODEL,
+                messages: [
+                    { role: "system", content: documentText }, // Adding document text as context
+                    { role: "user", content: message }
+                ],
+                max_tokens: 200
+            })
+        });
+
+        const data = await response.json();
+        const botReply = data.choices?.[0]?.message?.content || "Sorry, I couldn't understand that.";
+
+        // Remove Typing Indicator
+        typingIndicator.remove();
+
+        // Append Bot Message
+        appendMessage(botReply, "bot");
+
+    } catch (error) {
+        typingIndicator.remove();
+        appendMessage("Error: Unable to reach AI service.", "bot");
+        console.error("API Error:", error);
+    }
+}
+
 
         // Enable sending messages with Enter key
         userInput.addEventListener("keypress", function(event) {
